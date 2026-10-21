@@ -1,0 +1,16 @@
+export const dashboardRouteTitleBySegment: Record<string, string> = {
+  appointments: "Appointments",
+  clients: "Clients",
+  services: "Services",
+  sales: "Sales",
+  products: "Products",
+  supplies: "Supplies",
+  pos: "POS",
+  expenses: "Expenses",
+  lashists: "Lash Artists",
+  reports: "Reports",
+  users: "Users",
+  roles: "Roles",
+  "payment-methods": "Payment methods",
+  "expense-categories": "Expense categories",
+};

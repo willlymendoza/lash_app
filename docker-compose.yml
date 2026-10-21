@@ -1,0 +1,42 @@
+services:
+  postgres_dev:
+    image: ${POSTGRES_IMAGE:?Set POSTGRES_IMAGE in .env}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DEV_DB:?Set POSTGRES_DEV_DB in .env}
+      TZ: ${NEXT_PUBLIC_TIMEZONE:?Set NEXT_PUBLIC_TIMEZONE in .env}
+    ports:
+      - "${POSTGRES_BIND_ADDRESS:?Set POSTGRES_BIND_ADDRESS in .env}:${POSTGRES_DEV_PORT:?Set POSTGRES_DEV_PORT in .env}:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", 'pg_isready -h 127.0.0.1 -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres_test:
+    image: ${POSTGRES_IMAGE:?Set POSTGRES_IMAGE in .env}
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_TEST_DB:?Set POSTGRES_TEST_DB in .env}
+      TZ: ${NEXT_PUBLIC_TIMEZONE:?Set NEXT_PUBLIC_TIMEZONE in .env}
+    ports:
+      - "${POSTGRES_BIND_ADDRESS:?Set POSTGRES_BIND_ADDRESS in .env}:${POSTGRES_TEST_PORT:?Set POSTGRES_TEST_PORT in .env}:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", 'pg_isready -h 127.0.0.1 -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_dev_data:
+    name: ${POSTGRES_DEV_VOLUME:?Set POSTGRES_DEV_VOLUME in .env}
+  postgres_test_data:
+    name: ${POSTGRES_TEST_VOLUME:?Set POSTGRES_TEST_VOLUME in .env}
