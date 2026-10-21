@@ -27,7 +27,7 @@ export async function SidebarShell() {
               {appConfig.name}
             </p>
             <p className="text-xs tracking-[0.22em] text-ink-400 uppercase">
-              Pro Dashboard
+              Dashboard
             </p>
           </div>
         </div>

@@ -14,7 +14,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## 🧠 Project Overview
 
-lash_pro is a fullstack internal management system for a lash studio.
+lash_app is a fullstack internal management system for a lash studio.
 
 The app handles:
 

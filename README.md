@@ -1,4 +1,4 @@
-# lash_pro
+# lash_app
 
 Internal studio management built with Next.js, TypeScript, Drizzle, PostgreSQL, and Better Auth. The application uses English, Guatemala time, and day/month/year dates.
 
